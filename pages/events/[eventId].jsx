@@ -1,4 +1,6 @@
 import React from 'react';
+import Head from 'next/head';
+
 import EventSummary from '../../components/event-details/event-summary/event-summary';
 import EventLogistics from '../../components/event-details/event-logistics/event-logistics';
 import EventContent from '../../components/event-details/event-content/event-content';
@@ -11,6 +13,10 @@ const EventDetail = ({ event }) => {
 
   return (
     <>
+      <Head>
+        <title>{event.title}</title>
+        <meta name='description' content={event.description} />
+      </Head>
       <EventSummary title={event.title} />
       <EventLogistics
         date={event.date}

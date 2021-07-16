@@ -1,4 +1,6 @@
 import React from 'react';
+import Head from 'next/head';
+
 import EventList from '../../components/events/event-list/event-list';
 import Button from '../../components/ui/button/button';
 import ErrorAlert from '../../components/ui/error-alert/error-alert';
@@ -6,9 +8,17 @@ import ResultsTitle from '../../components/events/results-title/results-title';
 import { getFilteredEvents } from '../../helpers/api-utils';
 
 const FilteredEvents = ({ hasError, events, date }) => {
+  const pageContent = (
+    <Head>
+      <title>Filtered Events</title>
+      <meta name='description' content={'All Events for filtered event'} />
+    </Head>
+  );
+
   if (hasError) {
     return (
       <>
+        {pageContent}
         <ErrorAlert>
           <p>Invalid filtered. Please adjust your values!</p>
         </ErrorAlert>
@@ -22,6 +32,7 @@ const FilteredEvents = ({ hasError, events, date }) => {
   if (!events || events.length === 0) {
     return (
       <>
+        {pageContent}
         <ErrorAlert>
           <p>No events found for the chosen filter!</p>
         </ErrorAlert>
@@ -36,6 +47,7 @@ const FilteredEvents = ({ hasError, events, date }) => {
 
   return (
     <div className='event-slug'>
+      {pageContent}
       <ResultsTitle date={newDate} />
       <EventList items={events} />
     </div>
